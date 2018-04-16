@@ -14,10 +14,10 @@ install_requires = [
 
 setup(
     name='sentry-dingding',
-    version='0.1.2',
-    author='Zhang Yunyu',
-    author_email='leanderztj@gmail.com',
-    url='https://github.com/L3T/sentry-dingding',
+    version='8.22',
+    author='VimT',
+    author_email='vimt@foxmail.com',
+    url='https://github.com/VimT/sentry-dingding',
     description='A Sentry extension which integrates with DingDing.',
     long_description=__doc__,
     packages=find_packages(exclude=['tests']),
