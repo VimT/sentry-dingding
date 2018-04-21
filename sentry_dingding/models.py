@@ -33,7 +33,7 @@ class DingDingMessage(NotifyPlugin):
     conf_key = 'dingding'
     project_conf_form = DingDingOptionsForm
 
-    def _bulid_link_message(self, project, error, level, server_name, link, msg):
+    def _bulid_link_message(self, project, error, level, server_name, link):
         title = '[{level}]{project_name}'.format(project_name=project, level=level)
 
         text = '''{server_name}: {error}'''.format(error=error, server_name=server_name, link=link, )
@@ -42,14 +42,15 @@ class DingDingMessage(NotifyPlugin):
 
         return result
 
-    def _build_message(self, project, error, level, server_name, link, msg):
+    def _build_message(self, project, error, level, server_name, link):
         title = '[{level}]{project_name}'.format(project_name=project, level=level)
 
         text = '''
-## [{server_name}]{error}
-{msg}
+### [{level}] {project_name}
+> Where: {server_name}
+{error}
 > [Click here to see details]({link})
-'''.format(error=error, level=level, msg=msg, server_name=server_name, link=link, )
+'''.format(error=error, level=level, server_name=server_name, link=link, project_name=project)
 
         result = {"msgtype": "markdown", "markdown": {"title": title, "text": text, }}
 
@@ -65,8 +66,8 @@ class DingDingMessage(NotifyPlugin):
         endpoint = self.get_option('endpoint', project)
         server_name = event.get_tag('server_name')
         title = event.title
-        msg = event.message
-        data = self._build_message(project, title, level, server_name, link, msg)
+        # msg = event.message
+        data = self._build_message(project, title, level, server_name, link)
         self.send_payload(
             endpoint=endpoint,
             data=data
