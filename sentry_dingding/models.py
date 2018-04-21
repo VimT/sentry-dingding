@@ -48,6 +48,7 @@ class DingDingMessage(NotifyPlugin):
         text = '''
 ### [{level}] {project_name}
 > Where: {server_name}
+
 {error}
 > [Click here to see details]({link})
 '''.format(error=error, level=level, server_name=server_name, link=link, project_name=project)
